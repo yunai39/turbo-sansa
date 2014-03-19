@@ -1,0 +1,37 @@
+<?php
+
+namespace Simplex;
+
+use Simplex\FlashBag;
+
+class Session {
+	protected $flashBag;
+	public function __construct(){
+		session_start();
+		$this->flashBag = new FlashBag();
+	}
+	
+	public function getFlashBag(){
+		return $this->flashBag;
+	}
+	
+	public function set($key,$value){
+		$_SESSION[$key] = $value;
+	}
+	
+	public function has($key){
+		return isset($_SESSION[$key]);	
+	}
+	
+	public function get($key){
+		return $_SESSION[$key];
+	}
+	
+	public function remove($key){
+		unset($_SESSION[$key]);
+	}
+	
+	public function clear(){
+		session_destroy();
+	}
+}

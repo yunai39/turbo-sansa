@@ -1,0 +1,8 @@
+{% if session.getFlashBag().has(errorType) %}
+<div class="{{noticeType}} notice">
+	
+	{% for error in session.getFlashBag().get(errorType) %}
+		{{error}}<br />
+	{% endfor %}
+</div>
+{% endif %}
