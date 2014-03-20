@@ -1,13 +1,13 @@
 <?php
 
 namespace Simplex\Connect;
-use Simplex\Connect\MySQLConnect;
+use Simplex\Connect\DatabaseManager;
 
 class EntityFinder{
 	protected $db;
 	protected $entityClass;
-	public function __construct($entityClass){
-		$this->db =  MySQLConnect::getConnect();
+	public function __construct($entityClass,$dm){
+		$this->db =  $dm->getConnect();
 		$this->entityClass = $entityClass;
 	}
 	
@@ -43,7 +43,7 @@ class EntityFinder{
 		}
 		$entities = array();
 		while($data = $request->fetch(\PDO::FETCH_ASSOC)){
-			$entities[$data['id']] = $this->entityClass($data);
+			$entities[] = $this->entityClass($data);
 		}
 		return $entities;
 	}
@@ -57,7 +57,7 @@ class EntityFinder{
 		}
 		$entities = array();
 		while($data = $request->fetch(\PDO::FETCH_ASSOC)){
-			$entities[$data['id']] = new $this->entityClass($data);
+			$entities[] = new $this->entityClass($data);
 		}
 		return $entities;
 

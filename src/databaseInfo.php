@@ -1,8 +1,8 @@
 <?php 
 
 $databaseInfo = array();
-$databaseInfo['driver'] = '';
-$databaseInfo['host'] = ''; 
-$databaseInfo['db'] = ''; 
-$databaseInfo['username'] = ''; 
-$databaseInfo['password'] = ''; 
+$databaseInfo['default']['driver'] = 'mysql';
+$databaseInfo['default']['host'] = 'localhost'; 
+$databaseInfo['default']['db'] = ''; 
+$databaseInfo['default']['username'] = ''; 
+$databaseInfo['default']['password'] = ''; 

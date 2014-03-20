@@ -3,7 +3,7 @@ namespace Simplex\Connect;
 
 class Entity{
 	
-	public function __construct(array $data){
+	public function __construct(array $data = array()){
 		$this->hydrate($data);
 	}
 	
@@ -17,6 +17,11 @@ class Entity{
     		$this->$method($value);
 		}
 	  }
+	}
+	
+	
+	public function getAttributs(){
+		return get_object_vars($this);
 	}
 	
 	public static function getTableName(){

@@ -2,17 +2,15 @@
 
 namespace Simplex\Connect;
 
-class MySQLConnect{
+class PDOConnect{
 	public static $connect;
 	
-	public static function getConnect(){
+	public static function getConnect($databaseInfo){
 		
 		if(self::$connect != Null){
 			return self::$connect;
 		}
 		else{
-			include(__DIR__.'/../../databaseInfo.php');
-			
 			$dn = $databaseInfo['driver'].':host='.$databaseInfo['host'].';dbname='.$databaseInfo['db'];
 			self::$connect = new \PDO($dn,$databaseInfo['username'],$databaseInfo['password']);
 			return self::$connect;
