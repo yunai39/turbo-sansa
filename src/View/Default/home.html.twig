@@ -1,4 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 Hello there !!
+
+{% for m in messages %}
+<div>
+	{{m.message}}
+</div>
+{% endfor %}
 {% endblock %}

@@ -81,18 +81,7 @@ class Controller{
 	public function setUrlGenerator($urlGenerator){
 		$this->urlGenerator = $urlGenerator;	
 	}
-	
-	/**
-	* getPassAdmin
-	*
-	* @return 		string 	the admin password
-	* @access       public
-	* @author       Marine BENOIT
-	*/
-	protected function getPassAdmin(){
-		return 'lionne';
-	}
-	
+
 	/**
 	* render
 	*

@@ -27,7 +27,7 @@ class Route{
 	* @access       protected
     * @var bool $needAdmin
     */
-	protected $needAdmin;
+	protected $neededRole;
 	
 	
 	/**
@@ -41,9 +41,9 @@ class Route{
 	* @access       public
 	* @author       Marine BENOIT
 	*/
-	public function __construct($controller,$needAdmin = false, array $argument = null){
+	public function __construct($controller,$neededRole = 'NO_ROLE', array $argument = null){
 		$this->controller = $controller;
-		$this->needAdmin = $needAdmin;
+		$this->neededRole = $neededRole;
 		$this->argument = $argument;
 	}
 	
@@ -76,8 +76,8 @@ class Route{
 	* @access       public
 	* @author       Marine BENOIT
 	*/
-	public function needAdmin(){
-		return $this->needAdmin;
+	public function neededRole(){
+		return $this->neededRole;
 	}
 	
 }

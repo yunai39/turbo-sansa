@@ -54,7 +54,7 @@ class UrlMatcher{
 					$return[$key] = $request->get($key);
 				}
 			}
-			$return['needAdmin'] = $route->needAdmin();
+			$return['neededRole'] = $route->neededRole();
 			return $return;
 		}
 		else{

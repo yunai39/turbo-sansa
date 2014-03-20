@@ -108,13 +108,22 @@ class Framework
     {
         try {
  			$route = $this->matcher->getArg($request);
-			if($route['needAdmin']){
-				if($this->session->has('login') == false){
+			if($route['neededRole'] != 'NO_ROLE'){
+				if($this->session->has('user') == false){
 					
 					if(!$this->session->has('refUrl')){
 						$this->session->set('refUrl' ,$request->getUri());
 					}
 					header('Location: '.$this->generator->getUrl('login'));   
+				}
+				else{
+					$user = $this->session->get('user');
+					if($user['role'] != $route['neededRole']){
+						if(!$this->session->has('refUrl')){
+						$this->session->set('refUrl' ,$request->getUri());
+						}
+						header('Location: '.$this->generator->getUrl('login'));   
+					}
 				}
 			}
 			$request->attributes->add($route);
