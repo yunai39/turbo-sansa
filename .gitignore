@@ -1,7 +1,4 @@
 cache/**
-src/Controller/
-src/Model/
-src/View/
 data
 src/databaseInfo.php
 web/doc
