@@ -20,16 +20,16 @@ class SecurityController extends Controller{
 	
 	public function logCheckAction(Request $request){
 		if($request->getMethod() == 'POST'){
-			$username = $request->get('username');
+			$username = $request->get('login');
 			$password = $request->get('password');
 			try{
-				$userProvider = new UserProvider();
-				$user = $userProvider->authentificate($username,$password);
+				$userProvider = new $this->configuration['security']['user_provider']();
+				$user = $userProvider->authentificate($username,$password,$this->configuration['security']['user_encoder']);
 				$this->session->setUser($user);
 			}catch(\Exception $e){
 				$this->session->getFlashBag()->add('login_error',$e->getMessage());
 			}
 		}
- 		return $this->redirect('home');
+ 		return $this->redirect('login');
 	}
 }

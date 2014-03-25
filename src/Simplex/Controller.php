@@ -33,6 +33,12 @@ class Controller{
 	protected $session;
 
 	/**
+	 * Configuration array
+	 * @var	array 	$configuration
+	 */
+	protected $configuration;
+	
+	/**
 	* setTwig
 	*
 	*
@@ -42,6 +48,7 @@ class Controller{
 	*/
 	public function setTwig($twig){
 		$this->twig = $twig;	
+		return $this;
 	}
 	
 	
@@ -68,6 +75,7 @@ class Controller{
 	*/
 	public function setSession($session){
 		$this->session = $session;	
+		return $this;
 	}
 	
 	/**
@@ -82,6 +90,10 @@ class Controller{
 		$this->urlGenerator = $urlGenerator;	
 	}
 
+	public function setConfiguration($configuration){
+		$this->configuration = $configuration;
+		return $this;
+	}
 	/**
 	* render
 	*

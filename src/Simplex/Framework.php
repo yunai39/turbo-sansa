@@ -54,6 +54,11 @@ class Framework
 	protected $session;
 
 	/**
+	 * Configuration array
+	 * @var	array 	$configuration
+	 */
+	protected $configuration;
+	/**
 	* __construct
 	*
 	* This function is the constructor for the Framework
@@ -66,13 +71,14 @@ class Framework
 	* @access       public
 	* @author       Marine BENOIT
 	*/
-    public function __construct(UrlMatcher $matcher, ControllerResolver $resolver, UrlGenerator $generator,Twig_Environment $twig,Session $session)
+    public function __construct(UrlMatcher $matcher, ControllerResolver $resolver, UrlGenerator $generator,Twig_Environment $twig,Session $session, array $configuration)
     {
         $this->matcher = $matcher;
         $this->resolver = $resolver;
 		$this->generator = $generator;
 		$this->twig = $twig;
 		$this->session = $session;
+		$this->configuration = $configuration;
     }
 	
 	
@@ -140,6 +146,7 @@ class Framework
 			$controller[0]->setTwig($this->twig);
 			$controller[0]->seturlGenerator($this->generator);
 			$controller[0]->setSession($this->session);
+			$controller[0]->setConfiguration($this->configuration);
             $arguments = $this->resolver->getArguments($request, $controller);
  
             return call_user_func_array($controller, $arguments);

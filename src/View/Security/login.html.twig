@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{% if session.getFlashBag().has('login_error') %}
+	{% for flash in session.getFlashBag().get('login_error') %}
+		{{flash}}
+	{% endfor %}
+{% endif %}
+
 <form action="{{urlgenerator('log_check')}}" method="POST">
 	<label for="login">Login</label>
 	<input type="text" name="login" id="login" />

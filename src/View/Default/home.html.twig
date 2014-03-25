@@ -2,6 +2,16 @@
 {% block body %}
 Hello there !!
 
+
+
+
+
+{% if session.getUser() %}
+Vous êtes authentifier authentifier
+{% else %}
+Vous n'êtes pas authentifier
+{% endif %}
+
 {% for m in messages %}
 <div>
 	{{m.message}}

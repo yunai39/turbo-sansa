@@ -14,7 +14,7 @@ use Simplex\Routing;
 use Simplex\Session;
 
 $request = Request::createFromGlobals();
-$routes = include __DIR__.'/../src/routing.php';
+$routes = include __DIR__.'/../config/routing.php';
 
 $matcher = new Routing\UrlMatcher($routes);
 $resolver = new HttpKernel\Controller\ControllerResolver();
@@ -23,7 +23,7 @@ $session = new Session();
 
 
 //Ajout des twig
-include('./twigExt.php');
-
-$framework = new Simplex\Framework($matcher, $resolver, $generator,$twig,$session);
+include('/../config/twigExt.php');
+include('/../config/config.php');
+$framework = new Simplex\Framework($matcher, $resolver, $generator,$twig,$session,$config);
 $response = $framework->handle($request);

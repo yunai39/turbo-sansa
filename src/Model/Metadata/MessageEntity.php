@@ -30,8 +30,5 @@ class MessageEntity extends Entity{
 		return $this;
 	}
 	
-	public static function getTableName(){
-		$class = explode('\\',trim( get_called_class(), 'Entity'));
-		return end($class);
-	}
+
 }

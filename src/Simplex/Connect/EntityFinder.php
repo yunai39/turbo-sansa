@@ -43,7 +43,7 @@ class EntityFinder{
 		}
 		$entities = array();
 		while($data = $request->fetch(\PDO::FETCH_ASSOC)){
-			$entities[] = $this->entityClass($data);
+			$entities[] = new $this->entityClass($data);
 		}
 		return $entities;
 	}

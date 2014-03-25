@@ -8,7 +8,7 @@ class DatabaseManager{
 	protected $config;
 	
 	public function __construct(){
-		include(__DIR__.'/../../databaseInfo.php');
+		include(__DIR__.'/../../../config/databaseInfo.php');
 		$this->config = $databaseInfo;
 	}
 	

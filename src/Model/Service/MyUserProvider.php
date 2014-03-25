@@ -1,9 +1,12 @@
 <?php
-namespace Simplex\Security\User;
+
+namespace Model\Service;
+use Simplex\Security\User\UserProvider;
+use Simplex\Connect\EntityFinder;
+use Simplex\Connect\DatabaseManager;
 use Simplex\Security\User\Encoder;
-use Simplex\Security\User\UserInterface;
-class UserProvider{
-	
+
+class MyUserProvider extends UserProvider{
 	
 	public function authentificate( $username,$password,$hash){
 		//Check If the user exist
@@ -23,20 +26,20 @@ class UserProvider{
 			return $user;
 		}
 	}
-
 	
 	
 	/**
 	 * This function will fetch the user in the datbase or anything else
 	 */
 	public function fetchData($username){
-		$user = new \Simplex\Security\User\User();
-		$encoder = new Encoder('md5');
-		$user->setPassword($encoder->hashPass('azerty',$user->getSalt()));
-		$user->setUsername('admin');
-		$user->addRole('ROLE_ADMIN');
-		return $user;
+    	$dm = new DatabaseManager();
+		$entityFind = new EntityFinder('Model\Metadata\UserEntity',$dm);
+		$user = $entityFind->getBy(array('username' => $username));
+		if($user){
+			return $user[0];
+		}
+		return false;
 	}
 	
-}
 
+}

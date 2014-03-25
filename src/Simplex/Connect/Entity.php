@@ -25,6 +25,7 @@ class Entity{
 	}
 	
 	public static function getTableName(){
-		return trim(__CLASS__, 'Entity');
+		$class = explode('\\',trim( get_called_class(), 'Entity'));
+		return end($class);
 	}
 }
