@@ -117,11 +117,16 @@ class Framework
 					header('Location: '.$this->generator->getUrl('login'));   
 				}
 				else{
-					$user = $this->session->get('user');
-					if($user['role'] != $route['neededRole']){
-						if(!$this->session->has('refUrl')){
-						$this->session->set('refUrl' ,$request->getUri());
+					$user = $this->session->getUser();
+					if($user){
+						if(!$user->hasRole($route['neededRole'])){
+							if(!$this->session->has('refUrl')){
+								$this->session->set('refUrl' ,$request->getUri());
+							}
+							header('Location: '.$this->generator->getUrl('login'));   
 						}
+					}else{
+						$this->session->getFlashBag()->add('login_error','noUser');
 						header('Location: '.$this->generator->getUrl('login'));   
 					}
 				}

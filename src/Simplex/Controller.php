@@ -112,4 +112,11 @@ class Controller{
 	public function redirect($action, $arg = null){
 		header('Location: '.$this->urlGenerator->getUrl($action , $arg));  
 	}
+	
+	public function getUser(){
+		if($this->session->has('user')){
+			return unserialize($this->session->get('user'));
+		}
+		else return false;
+	}
 }

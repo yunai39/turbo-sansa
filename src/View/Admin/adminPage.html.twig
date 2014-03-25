@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{{session.getUser().getUsername()}}
+<br />
 You need to have admin right !!!
 {% endblock %}

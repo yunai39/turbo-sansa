@@ -1,5 +1,5 @@
 <?php
-namespace Simple\Security\User;
+namespace Simplex\Security\User;
 use Simplex\Security\User\Encoder;
 
 class UserInterface{
@@ -16,9 +16,17 @@ class UserInterface{
 	}
 	
 	
+	public function getEncoder(){
+		return $this->encoder;
+	}
+	
 	public function setPassword($password){
 		$this->password = $this->encoder->hashPass($password,$this->salt);
 		return $this;
+	}
+	
+	public function getPassword(){
+		return $this->password;
 	}
 	
 	public function getSalt(){

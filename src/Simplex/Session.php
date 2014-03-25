@@ -34,4 +34,15 @@ class Session {
 	public function clear(){
 		session_destroy();
 	}
+	
+	public function getUser(){
+		if(isset($_SESSION['user'])){
+			return unserialize($_SESSION['user']);
+		}
+		return true;
+	}
+	
+	public function setUser($user){
+		$_SESSION['user'] = serialize($user);
+	}
 }
