@@ -40,7 +40,7 @@ class UrlGenerator{
 	* @access       public
 	* @author       Marine BENOIT
 	*/
-	public function getUrl($action , $arg,$absolute = false){
+	public function getUrl($action , $arg = array(),$absolute = false){
 		$url='app.php?page='.$action;
 		if(count($arg) != 0){
 			foreach($arg as $key => $value){

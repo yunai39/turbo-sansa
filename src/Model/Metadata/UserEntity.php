@@ -9,6 +9,9 @@ class UserEntity extends Entity implements UserInterface{
 	protected $salt;
 	protected $roles;
 	protected $username;
+	protected $picturePath;
+	protected $firstName;
+	protected $lastName;
 	
 	public function getId(){
 		return $this->id;
@@ -45,6 +48,34 @@ class UserEntity extends Entity implements UserInterface{
 	
 	public function getUsername(){
 		return $this->username;
+	}
+	
+	
+	public function setPicturePath($picturePath){
+		$this->picturePath = $picturePath;
+		return $this;
+	}
+	
+	public function getPicturePath(){
+		return $this->picturePath;
+	}	
+	
+	public function setLastName($lastName){
+		$this->lastName = $lastName;
+		return $this;
+	}
+	
+	public function getLastName(){
+		return $this->setLastName;
+	}	
+	
+	public function setFirstName($firstName){
+		$this->firstName = $firstName;
+		return $this;
+	}
+	
+	public function getFirstName(){
+		return $this->firstName;
 	}
 	
 	public function setRoles($roles){

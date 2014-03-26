@@ -35,6 +35,13 @@ class Session {
 		session_destroy();
 	}
 	
+	public function hasUser(){
+		if(isset($_SESSION['user'])){
+			return true;
+		}
+		return false;
+	}
+	
 	public function getUser(){
 		if(isset($_SESSION['user'])){
 			return unserialize($_SESSION['user']);

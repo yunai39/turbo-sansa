@@ -9,6 +9,7 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Symfony\\Component\\Routing' => array($vendorDir . '/symfony/routing'),
     'Symfony\\Component\\HttpKernel' => array($vendorDir . '/symfony/http-kernel'),
+    'Symfony\\Component\\EventDispatcher' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\HttpFoundation' => array($vendorDir . '/symfony/http-foundation'),
     'Simplex' => array($baseDir . '/src'),
     'SessionHandlerInterface' => array($vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs'),
