@@ -17,9 +17,6 @@ class HomeController extends Controller{
 		$messages = $entityFind->getAll();
  		return $this->render('Default/home.html.twig',array('messages' => $messages));
     }
-	
-	public function adminPageAction(Request $request){
- 		return $this->render('Admin/adminPage.html.twig');
-	}
+
 
 }

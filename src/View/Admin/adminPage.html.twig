@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{session.getUser().getUsername()}}
-<br />
-You need to have admin right !!!
+Welcome {{session.getUser().getUsername()}}!!
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#user" data-toggle="tab">User</a></li>
+		  <li><a href="#message" data-toggle="tab">Message</a></li>
+		</ul>
+		
+		<!-- Tab panes -->
+		<div class="tab-content">
+		  <div class="tab-pane active" id="user">
+		  	<h4>User list</h4>
+		  	<table class="table">
+		  		<thead>
+		  			<tr>
+		  				<th>Username</th>
+		  				<th>FirstName</th>
+		  				<th>LastName</th>
+		  			</tr>
+		  		</thead>
+		  		{% for user in users %}
+		  			<tr><td>{{user.username}}</td><td>{{user.firstName}}</td><td>{{user.lastName}}</td></tr>
+		  		{% endfor %}
+		  	</table>
+		  	<a href="{{urlgenerator('addUser')}}" class="btn btn-default">Add</a>
+		  </div>
+		  <div class="tab-pane" id="message">
+		  	<h4>Message list</h4>
+		  </div>
+		</div>
+	</div>
+</div>
+<script>
+	$('#user a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+	$('#message a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+	</script>
 {% endblock %}

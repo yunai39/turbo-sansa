@@ -66,7 +66,7 @@ class UserEntity extends Entity implements UserInterface{
 	}
 	
 	public function getLastName(){
-		return $this->setLastName;
+		return $this->lastName;
 	}	
 	
 	public function setFirstName($firstName){
