@@ -28,4 +28,16 @@ class Entity{
 		$class = explode('\\',trim( get_called_class(), 'Entity'));
 		return end($class);
 	}
+	
+	public function copy($entity){
+		foreach (get_object_vars($this) as  $value)
+	  	{
+		    $method = 'set'.ucfirst($value);
+			$methodG = 'get'.ucfirst($value);
+		    if (method_exists($this, $method))
+			{
+				$this->$method($entity->$methodG());
+			}
+	  	}
+	} 
 }

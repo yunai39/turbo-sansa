@@ -27,3 +27,4 @@ include('/../config/twigExt.php');
 include('/../config/config.php');
 $framework = new Simplex\Framework($matcher, $resolver, $generator,$twig,$session,$config);
 $response = $framework->handle($request);
+$response->send();

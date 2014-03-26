@@ -51,6 +51,10 @@ class RouteCollection{
 	* @author       Marine BENOIT
 	*/
 	public function get($name){
-		return $this->arrayRoute[$name];
+		if(isset($this->arrayRoute[$name]))
+			return $this->arrayRoute[$name];
+		else 
+			throw  new \Simplex\Routing\RoutingException();
+				
 	}
 }

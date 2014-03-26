@@ -12,9 +12,19 @@
 
 	</head>
 	<body>
+		
+		
+	<div class="row">
+		<div class="large-12 columns">
+			<H1>{% block title_body %}This is my amazing website with Sansa{% endblock %}</H1>
+		</div>
+		<div class="large-12 columns">
 			{% block body %}
 			{% endblock %}
+		</div>
 			{% block javascript %}
-		 	{% endblock %}    
+		 	{% endblock %}   
+		
+	</div> 
 	</body>
 </html>

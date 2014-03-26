@@ -150,13 +150,10 @@ class Framework
             $arguments = $this->resolver->getArguments($request, $controller);
  
             return call_user_func_array($controller, $arguments);
-        } catch (ResourceNotFoundException $e) {
-        	$template = $this->twig->loadTemplate('Notfound.html.twig');
-            return new Response($template->display(array()));
         } 
         catch (\Exception $e) {
         	$template = $this->twig->loadTemplate('Error.html.twig');
-            return new Response($template->display(array('error' => $e->getMessage())));
+            return new Response($template->display(array('error' => $e->getMessage(), 'code' => $e->getCode())));
         }
     }
 }
