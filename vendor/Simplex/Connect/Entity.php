@@ -1,6 +1,7 @@
 <?php
 namespace Simplex\Connect;
 use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
+use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
 
 class Entity{
 	
@@ -27,7 +28,7 @@ class Entity{
 	
 	public static function getTableName(){
 		$c = new ReflectionAnnotatedClass(get_called_class());
-		return $c->getAnnotation('Simplex\Connect\TableAnnotation')->value;
+		return $c->getAnnotation('Simplex\Connect\TableAnnotation')->getTableName();
 	}
 	
 	public function copy($entity){

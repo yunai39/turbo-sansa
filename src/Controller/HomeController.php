@@ -17,6 +17,7 @@ class HomeController extends Controller{
     	$dm = new DatabaseManager();
 		$entityFind = new EntityFinder('Model\Metadata\MessageEntity',$dm);
 		$messages = $entityFind->getAll();
+		$messages[0]->getAttributs();
  		return $this->render('Default/home.html.twig',array('messages' => $messages));
     }
 

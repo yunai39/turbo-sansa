@@ -2,15 +2,42 @@
 namespace Model\Metadata;
 use Simplex\Connect\Entity;
 use Simplex\Security\User\UserInterface;
-
+/**
+ * @TableAnnotation(tableName="user", database="default")
+ */
 class UserEntity extends Entity implements UserInterface{
+	
+	/*
+	 * @AttributAnnotation(name= "id", columns="id",type="integer")
+	 */
 	protected $id;	
+	/*
+	 * @AttributAnnotation(name= "password", columns="password",type="string")
+	 */
 	protected $password;
+	/*
+	 * @AttributAnnotation(name= "salt", columns="salt",type="string")
+	 */
 	protected $salt;
+	/*
+	 * @AttributAnnotation(name= "roles", columns="roles",type="string")
+	 */
 	protected $roles;
+	/*
+	 * @AttributAnnotation(name= "username", columns="username",type="string")
+	 */
 	protected $username;
+	/*
+	 * @AttributAnnotation(name= "picturePath", columns="picturePath",type="string")
+	 */
 	protected $picturePath;
+	/*
+	 * @AttributAnnotation(name= "firstName", columns="firstName",type="string")
+	 */
 	protected $firstName;
+	/*
+	 * @AttributAnnotation(name= "lastName", columns="lastName",type="string")
+	 */
 	protected $lastName;
 	
 	public function getId(){

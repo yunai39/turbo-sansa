@@ -1,13 +1,9 @@
-
 <?php
-
-
-
 namespace Simplex\Connect\Addendum;
 use Simplex\Connect\Addendum\Annotation;
 
 	
-	class ReflectionAnnotatedProperty extends ReflectionProperty {
+	class ReflectionAnnotatedProperty extends \ReflectionProperty {
 		private $annotations;
 		
 		public function __construct($class, $name) {

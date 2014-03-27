@@ -4,9 +4,13 @@ use Simplex\Connect\Entity;
 use Simplex\Connect\TableAnnotation  as TableAnnotation;
 
 /**
- * @TableAnnotation("messages")
+ * @TableAnnotation(tableName="messages", database="default")
  */
 class MessageEntity extends Entity{
+	
+	/*
+	 * @AttributAnnotation(name= "id", columns="id",type="integer")
+	 */
 	protected $id;
 	protected $title;
 	protected $message;
