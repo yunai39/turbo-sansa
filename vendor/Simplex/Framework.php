@@ -155,7 +155,7 @@ class Framework
         } 
         catch (\Exception $e) {
         	$template = $this->twig->loadTemplate('Error.html.twig');
-            return new Response($template->display(array('error' => $e->getMessage(), 'code' => $e->getCode())));
+            return new Response($template->display(array('error' => $e )));
         }
     }
 }

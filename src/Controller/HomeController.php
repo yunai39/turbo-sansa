@@ -7,7 +7,8 @@ use Model\Metadata\MessageEntity;
 use Model\Form\TestForm;
 use Simplex\Controller;
 use Simplex\Connect\EntityFinder;
-use Simplex\Connect\DatabaseManager;;
+use Simplex\Connect\DatabaseManager;
+use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
 
 class HomeController extends Controller{
 	
@@ -24,9 +25,7 @@ class HomeController extends Controller{
 		if($request->getMethod() == 'POST'){
 			$form->bind($request);
 			if($form->isValid()){
-				echo 'Le formulaire est valide';
-			}else{
-				echo 'Error';
+
 			}
 		}
 		$form->setAction($this->urlGenerator->getUrl('formTest'));

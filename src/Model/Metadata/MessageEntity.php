@@ -1,6 +1,11 @@
 <?php
 namespace Model\Metadata;
 use Simplex\Connect\Entity;
+use Simplex\Connect\TableAnnotation  as TableAnnotation;
+
+/**
+ * @TableAnnotation("messages")
+ */
 class MessageEntity extends Entity{
 	protected $id;
 	protected $title;

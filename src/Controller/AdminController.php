@@ -4,16 +4,22 @@ use Simplex\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Simplex\Connect\EntityFinder;
-use Simplex\Connect\DatabaseManager;;
+use Simplex\Connect\DatabaseManager;
+use Model\Form\addUserForm;
 
 class AdminController extends Controller{
 
 
 	public function addUserFormAction(Request $request){
+		$form = new addUserForm();
 		if($request->getMethod() == 'POST'){
-			print_r($request->files->get('pictureProfil'));
+			$form->bind($request);
+			if($form->isValid()){
+
+			}
 		}
-		return $this->render('Admin/addUser.html.twig');
+		$form->setAction($this->urlGenerator->getUrl('addUser'));
+		return $this->render('Admin/addUser.html.twig',array('form' => $form->render()));
 	}
 	
 		

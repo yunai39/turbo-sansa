@@ -13,6 +13,7 @@ class EntityFinder{
 	
 	public function get($id){
 		$tableName = call_user_func($this->entityClass.'::getTableName');
+		var_dump($tableName);df();
 		$sql = "SELECT * FROM ".$tableName." where id=:id";
 		$request = $this->db->prepare($sql, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
 		$request->execute(array( ':id' => $id));
