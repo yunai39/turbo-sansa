@@ -11,6 +11,7 @@ $routes = new Routing\RouteCollection();
  * Gestion Routing
  */
 $routes->add('home', new Routing\Route(  'Controller\\HomeController::indexAction'));
+$routes->add('formTest', new Routing\Route(  'Controller\\HomeController::formTestAction'));
 $routes->add('admin', new Routing\Route(  'Controller\\AdminController::adminPageAction','ROLE_ADMIN'));
 $routes->add('addUser', new Routing\Route(  'Controller\\AdminController::addUserFormAction','ROLE_ADMIN'));
 
