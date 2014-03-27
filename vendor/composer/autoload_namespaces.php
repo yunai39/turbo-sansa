@@ -11,7 +11,7 @@ return array(
     'Symfony\\Component\\HttpKernel' => array($vendorDir . '/symfony/http-kernel'),
     'Symfony\\Component\\EventDispatcher' => array($vendorDir . '/symfony/event-dispatcher'),
     'Symfony\\Component\\HttpFoundation' => array($vendorDir . '/symfony/http-foundation'),
-    'Simplex' => array($baseDir . '/src'),
+    'Simplex' => array($baseDir . '/vendor'),
     'SessionHandlerInterface' => array($vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs'),
     'Controller' => array($baseDir . '/src'),
     'Model' => array($baseDir . '/src'),
