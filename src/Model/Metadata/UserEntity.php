@@ -39,6 +39,11 @@ class UserEntity extends Entity implements UserInterface{
 	 * @AttributAnnotation(name= "lastName", columns="lastName",type="string")
 	 */
 	protected $lastName;
+	/*
+	 * @AttributAnnotation(name= "email", columns="email",type="string")
+	 * @ValidationAnnotation(name = "EmailValidator")
+	 */
+	protected $email;
 	
 	public function getId(){
 		return $this->id;
@@ -105,6 +110,14 @@ class UserEntity extends Entity implements UserInterface{
 		return $this->firstName;
 	}
 	
+	public function setEmail($email){
+		$this->email = $email;
+		return $this;
+	}
+	
+	public function getEmail(){
+		return $this->email;
+	}
 	public function setRoles($roles){
 		$this->roles = $roles;
 		return $this;

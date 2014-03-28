@@ -8,6 +8,7 @@ class Form{
 	protected $method;
 	protected $actionUrl;
 	protected $encrypt;
+	protected $mapped;
 	
 	const METHOD_POST = "POST";
 	const METHOD_GET = "GET";
@@ -22,6 +23,12 @@ class Form{
 		$this->method = self::METHOD_POST;
 		$this->encrypt = self::ENCRYPT_MULTIPART;
 		$this->setObject();
+		$this->mapped = false;
+	}
+	
+	public function setMapped($mapped){
+		$this->mapped = $mapped;
+		return $this;
 	}
 	
 	public function setObject(){
@@ -69,6 +76,8 @@ EOF;
 	
 	public function isValid(){
 		$test = true;
+		
+		
 		foreach($this->arrayElement as $key => $value){
 			if(!$value->isValid()){
 				$error[$key] = $value->getErrors();
