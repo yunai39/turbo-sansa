@@ -21,7 +21,12 @@ class Entity{
 	  }
 	}
 	
-	
+	public function get($key){
+		if(isset($this->$key)){
+			return $this->$key;
+		}
+		return false;
+	}
 	public function getAttributs(){
 		return get_object_vars($this);
 	}

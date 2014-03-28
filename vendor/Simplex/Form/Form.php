@@ -1,5 +1,6 @@
 <?php
 namespace Simplex\Form;
+use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
 use Symfony\Component\HttpFoundation\Request;
 class Form{
 	
@@ -8,6 +9,7 @@ class Form{
 	protected $method;
 	protected $actionUrl;
 	protected $encrypt;
+	protected $entity;
 	protected $mapped;
 	
 	const METHOD_POST = "POST";
@@ -58,7 +60,10 @@ EOF;
 		foreach($this->arrayElement as $value){
 			
 			$render .= <<<EOF
+			<div>
+				{$value->renderError()}<br />
 				{$value->render()}
+			</div>
 EOF;
 		}
 		$render .= <<<EOF
@@ -74,14 +79,37 @@ EOF;
 		return $this->arrayElement[$key]->getValue();
 	}
 	
-	public function isValid(){
+	public function isValid($entity = null){
 		$test = true;
-		
-		
+		if($entity != null){
+			$attributs = $entity->getAttributs();
+			unset($attributs['id']);
+			
+			foreach($attributs as $key => $value){
+				if(isset($this->arrayElement[$key])){
+					$propriety = new ReflectionAnnotatedProperty(get_class ($entity) , $key);
+					$v = $propriety->getAllAnnotations('Simplex\Connect\ValidationAnnotation');
+					if($v != null){
+						foreach($v as $validator){
+							$ret = $validator->check($this->arrayElement[$key]->getValue());
+							if( $ret !== true ){
+								$this->arrayElement[$key]->addError($ret);
+								$test = false;
+							}
+						}	
+					}
+					$m = 'set'.ucfirst($key);
+					$entity->$m($this->arrayElement[$key]->getValue());
+				}
+				
+			}
+		}
 		foreach($this->arrayElement as $key => $value){
 			if(!$value->isValid()){
-				$error[$key] = $value->getErrors();
 				$test = false;
+			}
+			if($value->hasError()){
+				$this->error[$key] = $value->getErrors(); 
 			}
 		}
 		return $test;

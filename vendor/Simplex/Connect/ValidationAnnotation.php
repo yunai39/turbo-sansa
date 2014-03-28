@@ -8,7 +8,7 @@ class ValidationAnnotation extends Annotation {
 	protected $param;
 	
 	public function getValidationName(){
-		return $this->tableName;
+		return $this->name;
 	}
 	
 	public function getParam(){
@@ -17,6 +17,7 @@ class ValidationAnnotation extends Annotation {
 	
 	
 	public function check($value){
-		return 'Validator\\'.$this->name::check($value,$this->$parma);
+		$n = 'Simplex\Form\Validator\\'.$this->name;
+		return $n::check($value,$this->param);
 	}
 }

@@ -3,18 +3,18 @@
 namespace Simplex\Form\Validator;
 use Simplex\Form\Validator\Model\ValidatorModel;
 
-class EmailValidator extends ValidatorModel{
+class isAlphANumericValidator extends ValidatorModel{
 	public static function check($toCheck, $checkElement = array()){
-		if(filter_var($toCheck, FILTER_VALIDATE_EMAIL)){
-		    return true;
+		if(ctype_alnum($toCheck)){
+			return true;
 		}
 		else{
-			return \Simplex\Form\Validator\EmailValidator::getMessage();
+			return \Simplex\Form\Validator\isAlphANumericValidator::getMessage();
 		}
 	}
 	
 	
 	public static function getMessage($param = null){
-		return 'The value need to be an email';
+		return 'The value need to be alpha numeric characters';
 	}
 }

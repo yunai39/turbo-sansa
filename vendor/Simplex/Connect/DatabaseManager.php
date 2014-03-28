@@ -2,6 +2,9 @@
 
 namespace Simplex\Connect;
 use Simplex\Connect\DatabaseManage;
+use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
+use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
+use Simplex\Connect\Entity;
 
 class DatabaseManager{
 	protected $dbs;
@@ -16,9 +19,23 @@ class DatabaseManager{
 		return PDOConnect::getConnect($this->config[$dbName]);
 	}
 	
-	public function add($entity){
+	public function add(Entity $entity){
 		$attributs = $entity->getAttributs();
 		unset($attributs['id']);
+		
+		//Check that the value are valid
+		/*$error = array();
+		foreach($attributs as $key => $value){
+			$propriety = new ReflectionAnnotatedProperty(get_class ($entity) , $key);
+			$v = $propriety->getAllAnnotations('Simplex\Connect\ValidationAnnotation');
+			if($v != null ){
+				echo '<pre>';
+				print_r($v);
+				echo '</pre>';
+			}
+		}
+		return false;*/
+		
 		$sql = "INSERT INTO ".$entity->getTableName()." ";
 		$columns = '';
 		$values = '';

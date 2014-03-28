@@ -6,18 +6,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Simplex\Connect\EntityFinder;
 use Simplex\Connect\DatabaseManager;
 use Model\Form\addUserForm;
+use Model\Metadata\UserEntity;
 
 class AdminController extends Controller{
 
 
 	public function addUserFormAction(Request $request){
+		$user = new UserEntity();
 		$form = new addUserForm();
 		if($request->getMethod() == 'POST'){
 			$form->bind($request);
-			if($form->isValid()){
-
+			if(!$form->isValid($user)){	
 			}
 		}
+		
 		$form->setAction($this->urlGenerator->getUrl('addUser'));
 		return $this->render('Admin/addUser.html.twig',array('form' => $form->render()));
 	}
@@ -25,6 +27,7 @@ class AdminController extends Controller{
 		
 	public function adminPageAction(Request $request){
     	$dm = new DatabaseManager();
+		
 		$entityFind = new EntityFinder('Model\Metadata\MessageEntity',$dm);
 		$messages = $entityFind->getAll();
 		$entityFind = new EntityFinder('Model\Metadata\UserEntity',$dm);

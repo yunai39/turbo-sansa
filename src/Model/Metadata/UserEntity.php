@@ -7,41 +7,48 @@ use Simplex\Security\User\UserInterface;
  */
 class UserEntity extends Entity implements UserInterface{
 	
-	/*
+	/**
 	 * @AttributAnnotation(name= "id", columns="id",type="integer")
 	 */
 	protected $id;	
-	/*
+	/**
 	 * @AttributAnnotation(name= "password", columns="password",type="string")
+	 * @ValidationAnnotation(name = "isCharValidator")
 	 */
 	protected $password;
-	/*
+	/**
 	 * @AttributAnnotation(name= "salt", columns="salt",type="string")
 	 */
 	protected $salt;
-	/*
-	 * @AttributAnnotation(name= "roles", columns="roles",type="string")
+	/**
+	  @AttributAnnotation(name= "roles", columns="roles",type="string")
 	 */
 	protected $roles;
-	/*
+	/**
 	 * @AttributAnnotation(name= "username", columns="username",type="string")
+	 * @ValidationAnnotation(name = "isAlphANumericValidator")
+	 * @ValidationAnnotation( name = "LengthValidator" ,param = {min = 4, max = 14})
 	 */
 	protected $username;
-	/*
+	/**
 	 * @AttributAnnotation(name= "picturePath", columns="picturePath",type="string")
 	 */
 	protected $picturePath;
-	/*
+	/**
 	 * @AttributAnnotation(name= "firstName", columns="firstName",type="string")
+	 * @ValidationAnnotation(name = "isCharValidator")
+	 * @ValidationAnnotation( name = "LengthValidator" ,param = {min = 4, max = 14})
 	 */
 	protected $firstName;
-	/*
+	/**
 	 * @AttributAnnotation(name= "lastName", columns="lastName",type="string")
+	 * @ValidationAnnotation(name = "isCharValidator")
+	 * @ValidationAnnotation( name = "LengthValidator" ,param = {min = 4, max = 14})
 	 */
 	protected $lastName;
-	/*
-	 * @AttributAnnotation(name= "email", columns="email",type="string")
-	 * @ValidationAnnotation(name = "EmailValidator")
+	/**
+	 * 	@AttributAnnotation(name= "email", columns="email",type="string")
+	 *	@ValidationAnnotation(name = "EmailValidator")
 	 */
 	protected $email;
 	

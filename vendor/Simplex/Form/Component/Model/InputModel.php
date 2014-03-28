@@ -29,6 +29,25 @@ class InputModel{
 		return null;	
 	}
 	
+	public function renderError(){
+		if(count($this->errors) == 0)
+			return TRUE;
+		$render = <<<EOF
+		<div class="form_error">	
+EOF;
+		foreach ($this->errors as $key => $value) {
+			
+		$render = <<<EOF
+		<p>$value</p>	
+EOF;
+		}
+
+		$render .= <<<EOF
+		</div>	
+EOF;
+		return $render;
+	}
+	
 	public function isValid(){
 		$boolTest = true;
 		foreach($this->validator as $validator){
@@ -41,6 +60,14 @@ class InputModel{
 	
 	public function getErrors(){
 		return $this->errors;
+	}
+	
+	public function addError($error){
+		$this->errors[] = $error;
+	}
+	
+	public function hasError(){
+		return isset($this->errors[0]);
 	}
 	
 	

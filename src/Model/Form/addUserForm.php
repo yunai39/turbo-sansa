@@ -31,6 +31,10 @@ class addUserForm extends Form{
 				array(
 				)
 			)
+			->add('email','text',array(
+					'label'			=> "Email"
+				)
+			)
 			->add('submit','submit')
 			->add('reset','reset');
 	}
