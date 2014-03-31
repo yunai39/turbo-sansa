@@ -2,16 +2,22 @@
 namespace Model\Metadata;
 use Simplex\Connect\Entity;
 use Simplex\Connect\TableAnnotation  as TableAnnotation;
+use Simplex\Connect\AttributAnnotation  as AttributAnnotation;
+use Simplex\Connect\TypeAttribut  as TypeAttribut;
 
 /**
  * @TableAnnotation(tableName="messages", database="default")
  */
 class MessageEntity extends Entity{
 	
-	/*
-	 * @AttributAnnotation(name= "id", columns="id",type="integer")
+	/**
+	 * @AttributAnnotation(name= "id", column s ="id",type=@TypeAttribut\IntTypeAnnotation(size=5,defaultValue=5))
 	 */
 	protected $id;
+
+	/**
+	 * @AttributAnnotation(name= "id", columns = "id", type = @TypeAttribut\IntTypeAnnotation( size=5 , defaultValue=5 ))
+	 */
 	protected $title;
 	protected $message;
 	

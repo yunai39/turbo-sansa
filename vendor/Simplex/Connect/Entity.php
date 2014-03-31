@@ -28,6 +28,19 @@ class Entity{
 		return false;
 	}
 	public function getAttributs(){
+		$array =  get_object_vars($this);
+		$class = get_called_class();
+		$ret = array();
+		foreach ($array as $key => $value) {
+			$c = new ReflectionAnnotatedProperty($class,$key);
+			if($c->hasAnnotation('Simplex\Connect\AttributAnnotation')){
+				$ret[$key] = $value;
+			};
+		}
+		return $ret;
+	}
+	
+	public function getAttributsClass(){
 		return get_object_vars($this);
 	}
 	

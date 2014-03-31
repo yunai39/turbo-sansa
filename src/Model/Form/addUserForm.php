@@ -35,8 +35,10 @@ class addUserForm extends Form{
 					'label'			=> "Email"
 				)
 			)
+			->add('file','file', array('label' => 'Fichier Img'))
 			->add('submit','submit')
 			->add('reset','reset');
+			
 	}
 
 	

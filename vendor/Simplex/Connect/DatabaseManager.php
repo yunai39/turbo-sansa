@@ -22,19 +22,17 @@ class DatabaseManager{
 	public function add(Entity $entity){
 		$attributs = $entity->getAttributs();
 		unset($attributs['id']);
-		
+		echo '<pre>';
+		print_r($attributs);
+		echo '</pre>';
 		//Check that the value are valid
-		/*$error = array();
+		$error = array();
 		foreach($attributs as $key => $value){
 			$propriety = new ReflectionAnnotatedProperty(get_class ($entity) , $key);
-			$v = $propriety->getAllAnnotations('Simplex\Connect\ValidationAnnotation');
+			$v = $propriety->getAllAnnotations('Simplex\Connect\AttributAnnotation');
 			if($v != null ){
-				echo '<pre>';
-				print_r($v);
-				echo '</pre>';
 			}
 		}
-		return false;*/
 		
 		$sql = "INSERT INTO ".$entity->getTableName()." ";
 		$columns = '';
@@ -50,8 +48,8 @@ class DatabaseManager{
 			$firstLoop = false;
 		}
 		$sql .= '('.$columns.') VALUES ('.$values.')';
-		var_dump($sql);
 		$request = $this->getConnect()->prepare($sql, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+
 		return $request->execute($attributs);
 	}
 	

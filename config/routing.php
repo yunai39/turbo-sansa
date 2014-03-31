@@ -12,8 +12,8 @@ $routes = new Routing\RouteCollection();
  */
 $routes->add('home', new Routing\Route(  'Controller\\HomeController::indexAction'));
 $routes->add('formTest', new Routing\Route(  'Controller\\HomeController::formTestAction'));
-$routes->add('admin', new Routing\Route(  'Controller\\AdminController::adminPageAction','ROLE_ADMIN'));
-$routes->add('addUser', new Routing\Route(  'Controller\\AdminController::addUserFormAction','ROLE_ADMIN'));
+$routes->add('admin', new Routing\Route(  'Controller\\AdminController::adminPageAction'));
+$routes->add('addUser', new Routing\Route(  'Controller\\AdminController::addUserFormAction'));
 
 $routes->add('login', new Routing\Route(  'Controller\\SecurityController::loginAction'));
 $routes->add('logout', new Routing\Route(  'Simplex\\Security\\Controller\\SecurityController::logoutAction'));

@@ -2,6 +2,7 @@
 namespace Simplex\Form;
 use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
 use Symfony\Component\HttpFoundation\Request;
+use Simplex\Form\Component\FileInput;
 class Form{
 	
 	protected $arrayElement;
@@ -59,9 +60,11 @@ class Form{
 EOF;
 		foreach($this->arrayElement as $value){
 			
+			$render .= '<div>';
+			if($value->hasError()){
+				$render .= $value->renderError().'<br />';
+			}
 			$render .= <<<EOF
-			<div>
-				{$value->renderError()}<br />
 				{$value->render()}
 			</div>
 EOF;
@@ -82,11 +85,11 @@ EOF;
 	public function isValid($entity = null){
 		$test = true;
 		if($entity != null){
-			$attributs = $entity->getAttributs();
+			$attributs = $entity->getAttributsClass();
 			unset($attributs['id']);
 			
-			foreach($attributs as $key => $value){
-				if(isset($this->arrayElement[$key])){
+			foreach($this->arrayElement as $key => $value){
+				if(array_key_exists($key, $attributs)){
 					$propriety = new ReflectionAnnotatedProperty(get_class ($entity) , $key);
 					$v = $propriety->getAllAnnotations('Simplex\Connect\ValidationAnnotation');
 					if($v != null){
@@ -123,7 +126,13 @@ EOF;
 	// %TODO how to handle file submit, and if the form is in method GET
 	public function bind(Request $request){
 		foreach($this->arrayElement as $key => $value){
-			if($request->request->has($key)){
+			
+			if($value instanceof FileInput){
+				if($request->files->has($key)){
+					$value->setValue($request->files->get($key));
+				}
+			}
+			elseif($request->request->has($key)){
 				$value->setValue($request->get($key));
 			}else{
 				$this->error[$key] = 'noElementInrequest';

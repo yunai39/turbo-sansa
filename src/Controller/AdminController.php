@@ -4,9 +4,11 @@ use Simplex\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Simplex\Connect\EntityFinder;
+use Simplex\Security\User\Encoder;
 use Simplex\Connect\DatabaseManager;
 use Model\Form\addUserForm;
 use Model\Metadata\UserEntity;
+use Model\Metadata\MessageEntity;
 
 class AdminController extends Controller{
 
@@ -16,10 +18,22 @@ class AdminController extends Controller{
 		$form = new addUserForm();
 		if($request->getMethod() == 'POST'){
 			$form->bind($request);
-			if(!$form->isValid($user)){	
+			if($form->isValid($user)){
+				echo '<pre>';
+				print_r($user);
+				echo '</pre>';
+    			$dm = new DatabaseManager();
+				$user->setSalt($user->unique_md5());
+				$user->addRole('ROLE_USER');
+				$user->upload();
+				$encoder = new Encoder($this->configuration['security']['user_encoder']);
+				$user->setPassword($encoder->hashPass($user->getPassword(),$user->getSalt()));
+				$ret = $dm->add($user);	
+				if($ret){
+					return $this->redirect('admin');
+				}
 			}
 		}
-		
 		$form->setAction($this->urlGenerator->getUrl('addUser'));
 		return $this->render('Admin/addUser.html.twig',array('form' => $form->render()));
 	}

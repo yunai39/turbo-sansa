@@ -2,6 +2,8 @@
 namespace Simplex\Connect;
 use Simplex\Connect\Addendum\Annotation;
 use Simplex\Connect\Addendum\Addendum;
+
+use Simplex\Connect\Addendum\Annotation\TypeAttribut as TypeAttribut;
 class AttributAnnotation extends Annotation {
 	protected $name;
 	protected $columns;

@@ -52,6 +52,25 @@ class UserEntity extends Entity implements UserInterface{
 	 */
 	protected $email;
 	
+	
+	public $file;
+	public function setFile($file){
+		$this->file = $file;
+		return $this;
+	}
+	public function getFile(){
+		return $this->file;
+	}
+	public function upload(){
+		if($this->file == null){
+			return false;
+		}
+		
+		$this->file->move('profileUser',$this->file->getClientOriginalName());
+		$this->picturePath = 'profileUser/'.$this->file->getClientOriginalName(); 
+		return true;
+	}
+	
 	public function getId(){
 		return $this->id;
 	}
@@ -132,9 +151,15 @@ class UserEntity extends Entity implements UserInterface{
 	
 	public function addRole($role){
 		$roles = unserialize($this->roles);
-		if(!in_array($role, $roles)){
+		if(is_array($roles)){
+			if(!in_array($role, $roles)){
+				$roles[] = $role;
+			}
+		}else{
+			$roles = array();
 			$roles[] = $role;
 		}
+		
 		$this->roles = serialize($roles);
 		return $this;
 	}
@@ -148,7 +173,7 @@ class UserEntity extends Entity implements UserInterface{
 	}
 	
 	
-	private function unique_md5() {
+	public function unique_md5() {
     	mt_srand(microtime(true)*100000 + memory_get_usage(true));
     	return substr(md5(uniqid(mt_rand(), true)),0,15);
 	}
