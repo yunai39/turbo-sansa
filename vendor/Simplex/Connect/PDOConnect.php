@@ -2,7 +2,7 @@
 
 namespace Simplex\Connect;
 
-class PDOConnect{
+class PDOConnect extends Connect{
 	public static $connect;
 	
 	public static function getConnect($databaseInfo){
