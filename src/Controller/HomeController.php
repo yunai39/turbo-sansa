@@ -7,8 +7,8 @@ use Model\Metadata\MessageEntity;
 use Model\Metadata\UserEntity;
 use Model\Form\TestForm;
 use Simplex\Controller;
-use Simplex\Connect\EntityFinder;
-use Simplex\Connect\DatabaseManager;
+use Simplex\Connect\EntityFinderPDO;
+use Simplex\Connect\DatabaseManagerPDO;
 use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
 use Simplex\Form\Validator as Validator;
 
@@ -16,8 +16,9 @@ class HomeController extends Controller{
 	
     public function indexAction(Request $request)
     {
-    	$dm = new DatabaseManager();
-		$entityFind = new EntityFinder('Model\Metadata\MessageEntity',$dm);
+    	// Remplacer ça par get DM
+    	$dm = new DatabaseManagerPDO();
+		$entityFind =$dm->getFinder(('Model\Metadata\MessageEntity'));
 		$messages = $entityFind->getAll();
  		return $this->render('Default/home.html.twig',array('messages' => $messages));
     }

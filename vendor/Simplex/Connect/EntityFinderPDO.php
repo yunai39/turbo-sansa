@@ -3,11 +3,11 @@
 namespace Simplex\Connect;
 use Simplex\Connect\DatabaseManager;
 
-class EntityFinder{
+class EntityFinderPDO{
 	protected $db;
 	protected $entityClass;
-	public function __construct($entityClass,$dm){
-		$this->db =  $dm->getConnect();
+	public function __construct($entityClass,$db){
+		$this->db =  $db;
 		$this->entityClass = $entityClass;
 	}
 	

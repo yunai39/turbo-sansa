@@ -1,18 +1,19 @@
 <?php
 
 namespace Simplex\Connect;
-use Simplex\Connect\DatabaseManage;
 use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
 use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
 use Simplex\Connect\Entity;
 
-class DatabaseManager{
+class DatabaseManagerPDO{
 	protected $dbs;
 	protected $config;
+	protected $finders;
 	
 	public function __construct(){
 		include(__DIR__.'/../../../config/databaseInfo.php');
 		$this->config = $databaseInfo;
+		$finder = array();
 	}
 	
 	public function getConnect($dbName = 'default'){
@@ -69,5 +70,15 @@ class DatabaseManager{
 		
 		$request = $this->getConnect()->prepare($sql, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
 		return $request->execute($attributs);
+	}
+	
+	public function getFinder($entityClass){
+		if(isset($this->finders[$entityClass])){
+			return $this->finders[$entityClass];
+		}else{
+			$this->finders[$entityClass] = new EntityFinderPDO($entityClass,$this->getConnect());
+			return $this->finders[$entityClass] ;
+		}
+		
 	}
 }
