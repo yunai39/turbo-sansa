@@ -22,7 +22,7 @@ class AdminController extends Controller{
 				echo '<pre>';
 				print_r($user);
 				echo '</pre>';
-    			$dm = new DatabaseManager();
+    			$dm = $this->getDatabaseManager();
 				$user->setSalt($user->unique_md5());
 				$user->addRole('ROLE_USER');
 				$user->upload();
@@ -40,11 +40,11 @@ class AdminController extends Controller{
 	
 		
 	public function adminPageAction(Request $request){
-    	$dm = new DatabaseManager();
+    	$dm = $this->getDatabaseManager();
 		
-		$entityFind = new EntityFinder('Model\Metadata\MessageEntity',$dm);
+		$entityFind = $dm->getFinder('Model\Metadata\MessageEntity');
 		$messages = $entityFind->getAll();
-		$entityFind = new EntityFinder('Model\Metadata\UserEntity',$dm);
+		$entityFind = $dm->getFinder('Model\Metadata\UserEntity');
 		$users = $entityFind->getAll();
  		return $this->render('Admin/adminPage.html.twig',array('users' => $users, 'messages' => $messages));
 	}

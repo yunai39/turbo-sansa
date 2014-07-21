@@ -5,7 +5,7 @@ use Twig_Environment;
 use Twig_Loader_Filesystem;
 
 use Symfony\Component\HttpFoundation\Response;
-
+use Simplex\Connect\DatabaseManager;
 /**
  * Controller
  * This class is an implementation of controller
@@ -37,6 +37,14 @@ class Controller{
 	 * @var	array 	$configuration
 	 */
 	protected $configuration;
+	
+	/**
+	 * Database Manager
+	 * @var array $databaseManager
+	 */
+	protected $databaseManagers;
+	
+
 	
 	/**
 	* setTwig
@@ -130,5 +138,26 @@ class Controller{
 			return unserialize($this->session->get('user'));
 		}
 		else return false;
+	}
+	
+	public function getDirectoryRoot(){
+		
+		return __DIR__.'/../../';
+	}
+	
+	public function getDatabaseManager($databaseName = 'default'){
+		if(isset($this->databaseManagers[$databaseName])){
+			return $this->databaseManagers[$databaseName];
+		}
+		else{
+			include($this->getDirectoryRoot().'/config/databaseInfo.php');
+			if(isset($databaseInfo[$databaseName])){
+				$managerName = "Simplex\Connect\DatabaseManager".$databaseInfo[$databaseName]['type'];
+				$this->databaseManagers[$databaseName] = new $managerName($databaseInfo);
+				return $this->databaseManagers[$databaseName];
+			}else{
+				return NULL;
+			}
+		}
 	}
 }

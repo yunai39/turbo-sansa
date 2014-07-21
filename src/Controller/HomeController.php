@@ -17,7 +17,7 @@ class HomeController extends Controller{
     public function indexAction(Request $request)
     {
     	// Remplacer ça par get DM
-    	$dm = new DatabaseManagerPDO();
+    	$dm = $this->getDatabaseManager();
 		$entityFind =$dm->getFinder(('Model\Metadata\MessageEntity'));
 		$messages = $entityFind->getAll();
  		return $this->render('Default/home.html.twig',array('messages' => $messages));

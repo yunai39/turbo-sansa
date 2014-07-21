@@ -5,19 +5,28 @@ use Simplex\Connect\Addendum\ReflectionAnnotatedClass;
 use Simplex\Connect\Addendum\ReflectionAnnotatedProperty;
 use Simplex\Connect\Entity;
 
-class DatabaseManagerPDO{
+class DatabaseManagerPDO extends DatabaseManager{
 	protected $dbs;
 	protected $config;
 	protected $finders;
+	protected $connect;
 	
 	public function __construct(){
 		include(__DIR__.'/../../../config/databaseInfo.php');
 		$this->config = $databaseInfo;
-		$finder = array();
+		$this->finders = array();
+		$this->connect = array();
 	}
 	
 	public function getConnect($dbName = 'default'){
-		return PDOConnect::getConnect($this->config[$dbName]);
+		if(isset($this->config[$dbName]['link'])){
+			return $this->config[$dbName]['link'];
+		}
+		else{
+			$dn = $this->config[$dbName]['driver'].':host='.$this->config[$dbName]['host'].';dbname='.$this->config[$dbName]['db'];
+			$this->config[$dbName]['link'] = new \PDO($dn,$this->config[$dbName]['username'],$this->config[$dbName]['password']);
+			return $this->config[$dbName]['link'];
+		}
 	}
 	
 	public function add(Entity $entity){
