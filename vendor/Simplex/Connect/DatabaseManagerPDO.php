@@ -35,7 +35,6 @@ class DatabaseManagerPDO extends DatabaseManager{
 		echo '<pre>';
 		print_r($attributs);
 		echo '</pre>';
-		//Check that the value are valid
 		$error = array();
 		foreach($attributs as $key => $value){
 			$propriety = new ReflectionAnnotatedProperty(get_class ($entity) , $key);
@@ -59,7 +58,7 @@ class DatabaseManagerPDO extends DatabaseManager{
 		}
 		$sql .= '('.$columns.') VALUES ('.$values.')';
 		$request = $this->getConnect()->prepare($sql, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
-
+var_dump($sql);
 		return $request->execute($attributs);
 	}
 	

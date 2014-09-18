@@ -4,3 +4,4 @@ src/databaseInfo.php
 web/doc
 web/foundation
 .project
+/nbproject/private/

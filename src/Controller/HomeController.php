@@ -18,9 +18,9 @@ class HomeController extends Controller{
     {
     	// Remplacer ça par get DM
     	$dm = $this->getDatabaseManager();
-		$entityFind =$dm->getFinder(('Model\Metadata\MessageEntity'));
-		$messages = $entityFind->getAll();
- 		return $this->render('Default/home.html.twig',array('messages' => $messages));
+		$entityFind = $dm->getFinder('Model\Metadata\PictureEntity');
+		$pictures = $entityFind->getAll();
+ 		return $this->render('Default/home.html.twig',array('pictures' => $pictures));
     }
 
 	public function formTestAction(Request $request){

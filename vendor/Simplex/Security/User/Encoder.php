@@ -19,7 +19,6 @@ class Encoder{
 	
 	public function checkPass($passRaw, $passHash, $salt){
 		var_dump($this->hashPass($passRaw, $salt));
-		var_dump($passHash);
 		return ($this->hashPass($passRaw, $salt) === $passHash);
 	}
 }

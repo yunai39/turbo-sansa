@@ -9,6 +9,7 @@ Welcome {{session.getUser().getUsername()}}!!
 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#user" data-toggle="tab">User</a></li>
 		  <li><a href="#message" data-toggle="tab">Message</a></li>
+		  <li><a href="#picture" data-toggle="tab">Picture</a></li>
 		</ul>
 		
 		<!-- Tab panes -->
@@ -31,6 +32,34 @@ Welcome {{session.getUser().getUsername()}}!!
 		  </div>
 		  <div class="tab-pane" id="message">
 		  	<h4>Message list</h4>
+		  	<table class="table">
+		  		<thead>
+		  			<tr>
+		  				<th>Id</th>
+		  				<th>Title</th>
+		  				<th>Message</th>
+		  			</tr>
+		  		</thead>
+		  		{% for message in messages %}
+		  			<tr><td>{{message.id}}</td><td>{{message.title}}</td><td>{{message.message}}</td></tr>
+		  		{% endfor %}
+		  	</table>
+		  </div>
+		  <div class="tab-pane" id="picture">
+		  	<h4>Picture list</h4>
+		  	<table class="table">
+		  		<thead>
+		  			<tr>
+		  				<th>Id</th>
+		  				<th>Date</th>
+		  				<th>Title</th>
+		  			</tr>
+		  		</thead>
+		  		{% for picture in pictures %}
+		  			<tr><td>{{picture.id}}</td><td>{{picture.date}}</td><td>{{picture.title}}</td></tr>
+		  		{% endfor %}
+		  	</table>
+		  	<a href="{{urlgenerator('addPicture')}}" class="btn btn-default">Add</a>
 		  </div>
 		</div>
 	</div>
@@ -41,6 +70,10 @@ Welcome {{session.getUser().getUsername()}}!!
 	  $(this).tab('show')
 	})
 	$('#message a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	})
+	$('#picture a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 	})

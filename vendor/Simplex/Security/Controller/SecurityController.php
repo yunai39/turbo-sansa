@@ -23,7 +23,7 @@ class SecurityController extends Controller{
 			$username = $request->get('login');
 			$password = $request->get('password');
 			try{
-				$userProvider = new $this->configuration['security']['user_provider']();
+				$userProvider = new $this->configuration['security']['user_provider']($this->getDatabaseManager());
 				$user = $userProvider->authentificate($username,$password,$this->configuration['security']['user_encoder']);
 				$this->session->setUser($user);
 			}catch(\Exception $e){
